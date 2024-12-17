@@ -1,0 +1,24 @@
+﻿@using IMS.WepApp.Components.Layout
+<Router AppAssembly="@typeof(Program).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="@routeData" DefaultLayout="@GetDefaultLayout(routeData.PageType)" />
+        <FocusOnNavigate RouteData="@routeData" Selector="main" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="@typeof(AuthLayout)">
+            <p>Page not found. Please try again.</p>
+        </LayoutView>
+    </NotFound>
+</Router>
+
+@code {
+    private Type GetDefaultLayout(Type pageType)
+    {
+        // Use MainLayout for /home and AuthLayout for sign-in/up
+        if (pageType == typeof(Pages.Home))
+        {
+            return typeof(AuthLayout);
+        }
+        return typeof(MainLayout);
+    }
+}

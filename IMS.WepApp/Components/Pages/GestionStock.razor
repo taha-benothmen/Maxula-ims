@@ -1,0 +1,153 @@
+﻿@page "/GestionStock"
+@inject HttpClient Http
+@inject IJSRuntime JS
+
+<h3>Gestion de Stock</h3>
+
+<div class="form-container">
+    <EditForm Model="NewProduct" OnValidSubmit="HandleAddOrUpdateProduct">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div>
+            <label for="name">Product Name:</label>
+            <InputText id="name" @bind-Value="NewProduct.Name" class="form-control" />
+        </div>
+
+        <div>
+            <label for="quantity">Quantity:</label>
+            <InputNumber id="quantity" @bind-Value="NewProduct.Quantity" class="form-control" />
+        </div>
+
+        <div>
+            <label for="price">Price:</label>
+            <InputNumber id="price" @bind-Value="NewProduct.Price" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">@((NewProduct.Id == 0) ? "Add Product" : "Update Product")</button>
+    </EditForm>
+</div>
+
+<h3>Product List</h3>
+<button class="btn btn-secondary" @onclick="LoadProducts">Refresh List</button>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Products != null)
+        {
+            @foreach (var product in Products)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Quantity</td>
+                    <td>@product.Price</td>
+                    <td>
+                        <button class="btn btn-warning" @onclick="() => EditProduct(product.Id)">Edit</button>
+                        <button class="btn btn-danger" @onclick="() => DeleteProduct(product.Id)">Delete</button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    private Product NewProduct = new();
+    private List<Product> Products = new();
+
+    private async Task HandleAddOrUpdateProduct()
+    {
+        try
+        {
+            HttpResponseMessage response;
+
+            // Add new product if Id is 0, otherwise update the existing product.
+            if (NewProduct.Id == 0) // Add new product
+            {
+                response = await Http.PostAsJsonAsync("api/Product/AddProduct", NewProduct);
+            }
+            else // Update product
+            {
+                response = await Http.PutAsJsonAsync($"api/Product/UpdateProduct/{NewProduct.Id}", NewProduct);
+            }
+
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadProducts(); // Refresh product list
+                ResetForm(); // Reset form after successful operation
+            }
+            else
+            {
+                Console.WriteLine($"Failed to save product. Error: {response.StatusCode}");
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error saving product: {ex.Message}");
+        }
+    }
+
+    private async Task LoadProducts()
+    {
+        try
+        {
+            Products = await Http.GetFromJsonAsync<List<Product>>("api/Product/GetAllProducts");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching products: {ex.Message}");
+        }
+    }
+
+    private async Task EditProduct(int id)
+    {
+        var product = await Http.GetFromJsonAsync<Product>($"api/Product/GetProduct/{id}");
+        if (product != null)
+        {
+            NewProduct = product; // Set the form to the selected product for editing
+        }
+    }
+
+    private async Task DeleteProduct(int id)
+    {
+        var confirm = await JS.InvokeAsync<bool>("confirm", "Are you sure you want to delete this product?");
+        if (confirm)
+        {
+            var response = await Http.DeleteAsync($"api/Product/DeleteProduct/{id}");
+            if (response.IsSuccessStatusCode)
+            {
+                await LoadProducts();
+            }
+            else
+            {
+                Console.WriteLine($"Failed to delete product. Error: {response.StatusCode}");
+            }
+        }
+    }
+
+    private void ResetForm()
+    {
+        NewProduct = new(); // Reset the form fields
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadProducts();
+    }
+
+    public class Product
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Quantity { get; set; }
+        public decimal Price { get; set; }
+    }
+}

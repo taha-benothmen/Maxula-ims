@@ -1,0 +1,42 @@
+﻿@page "/signin"
+@using IMS.WepApp.Components.Layout
+@layout AuthLayout
+
+<h3>Sign In</h3>
+
+<EditForm Model="@signinModel" OnValidSubmit="HandleLogin">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <label for="email">Email</label>
+        <InputText id="email" class="form-control" @bind-Value="signinModel.Email" />
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password</label>
+        <InputText id="password" type="password" class="form-control" @bind-Value="signinModel.Password" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Sign In</button>
+</EditForm>
+<p>Don't have an account? <NavLink href="/signup">Sign up</NavLink></p>
+
+@code {
+    private SignInModel signinModel = new SignInModel();
+
+     private void HandleLogin()
+    {
+        // Simulate login logic
+        Navigation.NavigateTo("/signup");
+    }
+
+
+    [Inject] private NavigationManager Navigation { get; set; }
+
+    public class SignInModel
+    {
+        public string Email { get; set; }
+        public string Password { get; set; }
+    }
+}

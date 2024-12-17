@@ -1,0 +1,47 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35514.174
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMS.MobileApp", "IMS.MobileApp\IMS.MobileApp.csproj", "{318E4C62-70A4-4D70-950A-759068239523}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMS.API", "IMS.API\IMS.API.csproj", "{A848E64D-A0F7-4F89-9145-648BBB6D3744}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMS.Shared", "IMS.Shared\IMS.Shared.csproj", "{E5122FAB-2BA7-4880-9BD6-CDED7CF99EE6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmailVerficationService", "EmailVerficationService\EmailVerficationService.csproj", "{319B978D-B900-4DEE-B056-F06B87559F1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Maxula-project", "Maxula-ims\Maxula-project.csproj", "{3358129D-D25F-4933-8320-AE1369A79E3E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{318E4C62-70A4-4D70-950A-759068239523}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{318E4C62-70A4-4D70-950A-759068239523}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{318E4C62-70A4-4D70-950A-759068239523}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{318E4C62-70A4-4D70-950A-759068239523}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{318E4C62-70A4-4D70-950A-759068239523}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A848E64D-A0F7-4F89-9145-648BBB6D3744}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A848E64D-A0F7-4F89-9145-648BBB6D3744}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A848E64D-A0F7-4F89-9145-648BBB6D3744}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A848E64D-A0F7-4F89-9145-648BBB6D3744}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5122FAB-2BA7-4880-9BD6-CDED7CF99EE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5122FAB-2BA7-4880-9BD6-CDED7CF99EE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5122FAB-2BA7-4880-9BD6-CDED7CF99EE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5122FAB-2BA7-4880-9BD6-CDED7CF99EE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{319B978D-B900-4DEE-B056-F06B87559F1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{319B978D-B900-4DEE-B056-F06B87559F1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{319B978D-B900-4DEE-B056-F06B87559F1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{319B978D-B900-4DEE-B056-F06B87559F1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3358129D-D25F-4933-8320-AE1369A79E3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3358129D-D25F-4933-8320-AE1369A79E3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3358129D-D25F-4933-8320-AE1369A79E3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3358129D-D25F-4933-8320-AE1369A79E3E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
